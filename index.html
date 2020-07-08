@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style type="text/css">
+      .sunday {
+        color: #ff0066;
+      }
+      .saturday {
+        color: #0066ff;
+      }
+    </style>
+    <title>PicCal - Make a calendar with the pictures you want</title>
+</head>
+<body onload="makeMonth()">
+    <button type="button" id="fileSelect">사진 올리기</button>
+    <button type="button" id="colorSelect">배경색 지정</button>
+    <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
+    <!-- Calendar Code Start -->
+    <br>
+    <h3 class="text-center" id="calTitle"></h3>
+    <br>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <table id="jan">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">1월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="feb">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">2월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="mar">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">3월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="apr">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">4월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <table id="may">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">5월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="jun">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">6월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="jul">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">7월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="aug">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">8월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <table id="sep">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">9월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="oct">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">10월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="nov">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">11월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2">
+          <table id="dec">
+            <tr>
+              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">12월</div></td>
+            </tr>
+            <tr>
+              <td class="sunday">日</td>
+              <td>月</td>
+              <td>火</td>
+              <td>水</td>
+              <td>木</td>
+              <td>金</td>
+              <td class="saturday">土</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+    <!-- Calendar Code End -->
+    <script type="text/javascript">
+        const today = new Date();
+        document.getElementById("calTitle").innerHTML = today.getFullYear() + " 달력";
+        console.log("###1")
+
+        function makeMonth() {
+            console.log("###2")
+            const month = new Array("jan", "feb", "mar", "apr",
+                                    "may", "jun", "jul", "aug",
+                                    "sep", "oct", "nov", "dec");
+
+            for (let i = 0; i < month.length; i++) {
+            loadCalendar(month[i], i, today);
+            }
+        }
+
+        function loadCalendar(strMon, idxMon, objDate) {
+            let firstDate = new Date(objDate.getFullYear(), idxMon, 1);
+            let lastDate = new Date(objDate.getFullYear(), idxMon + 1, 0);
+
+            let tbCalendar = document.getElementById(strMon);
+            while (tbCalendar.rows.length > 2) {
+            tbCalendar.deleteRow(tbCalendar.rows.length - 1);
+            }
+
+            let row = tbCalendar.insertRow();
+            let index = 0;
+            let cell;
+
+            // 1일이 시작되기 전까지 공란을 생성
+            for (let i = 0; i < firstDate.getDay(); i++) {
+            cell = row.insertCell();
+            index = index + 1;
+            }
+
+            // 1일 ~ 마지막 날까지 입력
+            for (let valDate = 1; valDate <= lastDate.getDate(); valDate++) {
+            cell = row.insertCell();
+            cell.innerHTML = valDate;
+
+            // 일요일
+            if (index % 7 == 0) {
+                cell.innerHTML = "<font color=#ff0066>" + valDate;
+            }
+
+            // 토요일
+            if (index % 7 == 6) {
+                cell.innerHTML = "<font color=#0066ff>" + valDate;
+                row = tbCalendar.insertRow();
+            }
+
+            // 오늘 날짜 강조 표시
+            // * 조건 *
+            // 시스템 연도 == 현재 작성 연도
+            // && 시스템 월 == 현재 작성 월
+            // && 시스템 일 == 현재 작성 일
+            if (today.getFullYear() == objDate.getFullYear()
+                && today.getMonth() == idxMon
+                && today.getDate() == valDate) {
+                    cell.bgColor = "#FAF58C";
+            }
+
+            index = index + 1;
+            }
+        }
+
+        // 이벤트 리스너 정의
+        const fileSelect = document.getElementById("fileSelect");
+        const fileElem = document.getElementById("fileElem");
+
+        fileSelect.addEventListener("click", function(e) {
+            if (fileElem) {
+                fileElem.click();
+            }
+        }, false);
+
+        fileElem.addEventListener("change", function(e) {
+            alert("file changed!");
+            let file = fileElem.files[0];
+            let reader = new FileReader();
+            reader.onloadend = function() {
+                document.body.style.backgroundImage = `url(${reader.result})`;
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }, false);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
