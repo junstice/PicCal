@@ -15,9 +15,16 @@
     <title>PicCal - Make a calendar with the pictures you want</title>
 </head>
 <body onload="makeMonth()">
-    <button type="button" id="fileSelect">사진 올리기</button>
-    <button type="button" id="colorSelect">배경색 지정</button>
-    <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
+    <div>
+      <input type="radio" id="res_fhd" name="radio_group" value="FHD" checked>
+      <label for="res_fhd">FHD(1920 x 1080)</label>
+      <input type="radio" id="res_hd" name="radio_group" value="HD">
+      <label for="res_hd">HD(1280 x 720)</label>
+      <button type="button" id="fileSelect">사진 올리기</button>
+      <button type="button" id="colorSelect">배경색 지정</button>
+      <button type="button" id="screenshot">이미지로 저장하기</button>
+      <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
+    </div>
     <!-- Calendar Code Start -->
     <br>
     <div id="piccal-bg-img">
@@ -234,6 +241,7 @@
     </div>
     <!-- Calendar Code End -->
     <script type="text/javascript">
+        // 달력 만들기
         const today = new Date();
         document.getElementById("calTitle").innerHTML = `${today.getFullYear()} 달력`;
 
@@ -248,9 +256,9 @@
         }
 
         function loadCalendar(strMon, idxMon, objDate) {
-            let firstDate = new Date(objDate.getFullYear(), idxMon, 1);
-            let lastDate = new Date(objDate.getFullYear(), idxMon + 1, 0);
-            let tbCalendar = document.getElementById(strMon);
+            const firstDate = new Date(objDate.getFullYear(), idxMon, 1);
+            const lastDate = new Date(objDate.getFullYear(), idxMon + 1, 0);
+            const tbCalendar = document.getElementById(strMon);
             
             while (tbCalendar.rows.length > 2) {
               tbCalendar.deleteRow(tbCalendar.rows.length - 1);
@@ -297,9 +305,10 @@
             }
         }
 
-        // 이벤트 리스너 정의
+        // 이미지 다운로드 이벤트 리스너 정의
         const fileSelect = document.getElementById("fileSelect");
         const fileElem = document.getElementById("fileElem");
+        const screenshot = document.getElementById("screenshot");
 
         fileSelect.addEventListener("click", function(e) {
             if (fileElem) {
@@ -308,8 +317,8 @@
         }, false);
 
         fileElem.addEventListener("change", function(e) {
-            let file = fileElem.files[0];
-            let reader = new FileReader();
+            const file = fileElem.files[0];
+            const reader = new FileReader();
             reader.onloadend = function() {
               document.getElementById("piccal-bg-img").style.backgroundImage = `url(${reader.result})`;
             }
@@ -317,9 +326,47 @@
                 reader.readAsDataURL(file);
             }
         }, false);
+
+        // HTML2CANVAS
+        // To render an element with html2canvas with some (optional) options, simply call html2canvas(element, options);
+        screenshot.addEventListener("click", function(e) {
+          html2canvas(document.getElementById("piccal-bg-img")).then(function(canvas) {
+            const a = document.createElement("a");
+            if (typeof a.download === "string") {
+              a.href = canvas.toDataURL("image/png");
+              a.download = "piccal-download-image.png";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            } else {
+              window.open(canvas.toDataURL("image/png"));
+            }
+          });
+        }, false);
+
+        // 라디오 버튼 이벤트 정의
+        const radios = document.getElementsByName("radio_group");
+        for (let i = 0; i < radios.length; i++) {
+          radios[i].addEventListener("change", function (e) {
+            setCalRes(e.returnValue, radios[i].id);
+          }, false);
+        }
+
+        function setCalRes(val, rid) {
+          if (val === true) {
+            if (rid === "res_fhd") {
+              document.getElementById("piccal-bg-img").style.width = "1920px";
+              document.getElementById("piccal-bg-img").style.height = "1080px";
+            } else {
+              document.getElementById("piccal-bg-img").style.width = "1280px";
+              document.getElementById("piccal-bg-img").style.height = "720px";
+            }
+          }
+        }
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="js/html2canvas.min.js"></script>
 </body>
 </html>
