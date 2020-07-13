@@ -13,14 +13,12 @@
       <label for="res_fhd">FHD(1920 x 1080)</label>
       <input type="radio" id="res_hd" name="radio_res" value="HD">
       <label for="res_hd">HD(1280 x 720)</label>
-      <!-- <input type="radio" id="res_fit" name="radio_res" value="FIT">
-      <label for="res_fit">브라우저 창에 맞게</label> -->
       <button type="button" id="fileSelect">사진 올리기</button>
       <button type="button" id="screenshot">이미지로 저장하기</button>
       <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
       <input type="color" id="bgColorPicker" value="#ffffff">
       <label for="bgColorPicker">배경색 지정</label>
-      <input type="radio" name="radio_img_size" id="auto">
+      <input type="radio" name="radio_img_size" id="auto" checked>
       <label for="auto">가운데</label>
       <input type="radio" name="radio_img_size" id="width">
       <label for="width">폭에 맞추기</label>
@@ -34,7 +32,7 @@
     <div id="piccal-bg-img" style="position: relative;">
       <div class="container text-center" id="calendar_container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
           <div class="row" name="title">
-          <div class="col"><h3 class="text-center" id="calTitle"></h3></div>
+          <div class="col" id="yearText"><h3 class="text-center" id="calTitle"></h3></div>
         </div>
         <br>
         <div class="row" name="calendar">
@@ -252,17 +250,21 @@
       </div>
     </div>
     <!-- Calendar Code End -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="js/html2canvas.min.js"></script>
     <script type="text/javascript">
         // 달력 만들기
         const today = new Date();
+        const month = new Array("jan", "feb", "mar", "apr",
+                                "may", "jun", "jul", "aug",
+                                "sep", "oct", "nov", "dec");
+
         document.getElementById("calTitle").innerHTML = `${today.getFullYear()}년`;
 
         function makeMonth() {
           resFHD();
-
-          const month = new Array("jan", "feb", "mar", "apr",
-                                  "may", "jun", "jul", "aug",
-                                  "sep", "oct", "nov", "dec");
 
           for (let i = 0; i < month.length; i++) {
             loadCalendar(month[i], i, today);
@@ -375,9 +377,6 @@
             } else if (rid === "res_hd") {
               resHD();
             }
-            // else {
-            //   resFIT();
-            // }
           }
         }
 
@@ -422,15 +421,49 @@
           document.getElementById("piccal-bg-img").style.width = "1280px";
           document.getElementById("piccal-bg-img").style.height = "720px";
         }
+        
+        var newYear;
+        const numYear = document.getElementById("yearText");
+        numYear.addEventListener("click", function(e) {
+          const initYear = document.getElementById("calTitle");
+          if (!initYear) return;
+          
+          const inputNum = document.createElement("input");          
+          inputNum.type = "number"
+          inputNum.value = newYear ? newYear : today.getFullYear();
+          inputNum.style = "width: 80px; font-size: 25px; font-weight: bold;";
+          inputNum.id = "setYear";
+          inputNum.min = "1900";
+          inputNum.max = "2150";
+          inputNum.onkeydown = () => {
+            return false;
+          }
+          
+          numYear.appendChild(inputNum);
+          inputNum.focus();
+          numYear.removeChild(initYear);
+        }, false);
 
-        // function resFIT() {
-        //   document.getElementById("piccal-bg-img").style.width = "100%";
-        //   document.getElementById("piccal-bg-img").style.height = "100%";
-        // }
+        numYear.addEventListener("focusout", function(e) {
+          const inputNum = document.getElementById("setYear");
+
+          const editedYear = document.createElement("h3");
+          editedYear.className = "text-center";
+          editedYear.id = "calTitle";
+          editedYear.innerHTML = inputNum.value + "년";
+
+          newYear = inputNum.value;
+          numYear.appendChild(editedYear);
+          numYear.removeChild(inputNum);
+
+          for (let i = 0; i < month.length; i++) {
+            loadCalendar(month[i], i, new Date(newYear, 0, 1));
+          }
+        }, false);
+
+        function eventFalse() {
+          return false;
+        }
     </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="js/html2canvas.min.js"></script>
-</body>
+  </body>
 </html>
