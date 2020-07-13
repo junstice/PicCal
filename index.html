@@ -4,36 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <style type="text/css">
-      .sunday {
-        color: #ff0066;
-      }
-      .saturday {
-        color: #0066ff;
-      }
-    </style>
+    <link rel="stylesheet" href="css/piccal-style.css">
     <title>PicCal - Make a calendar with the pictures you want</title>
 </head>
 <body onload="makeMonth()">
     <div>
-      <input type="radio" id="res_fhd" name="radio_group" value="FHD" checked>
+      <input type="radio" id="res_fhd" name="radio_res" value="FHD" checked>
       <label for="res_fhd">FHD(1920 x 1080)</label>
-      <input type="radio" id="res_hd" name="radio_group" value="HD">
+      <input type="radio" id="res_hd" name="radio_res" value="HD">
       <label for="res_hd">HD(1280 x 720)</label>
+      <!-- <input type="radio" id="res_fit" name="radio_res" value="FIT">
+      <label for="res_fit">브라우저 창에 맞게</label> -->
       <button type="button" id="fileSelect">사진 올리기</button>
-      <button type="button" id="colorSelect">배경색 지정</button>
       <button type="button" id="screenshot">이미지로 저장하기</button>
       <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
+      <input type="color" id="bgColorPicker" value="#ffffff">
+      <label for="bgColorPicker">배경색 지정</label>
+      <input type="radio" name="radio_img_size" id="auto">
+      <label for="auto">가운데</label>
+      <input type="radio" name="radio_img_size" id="width">
+      <label for="width">폭에 맞추기</label>
+      <input type="radio" name="radio_img_size" id="height">
+      <label for="height">높이에 맞추기</label>
+      <input type="radio" name="radio_img_size" id="full">
+      <label for="full">틀에 맞추기</label>
     </div>
     <!-- Calendar Code Start -->
     <br>
-    <div id="piccal-bg-img">
-      <h3 class="text-center" id="calTitle"></h3>
-      <br>
-      <div class="container text-center">
-        <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-2">
+    <div id="piccal-bg-img" style="position: relative;">
+      <div class="container text-center" id="calendar_container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+          <div class="row" name="title">
+          <div class="col"><h3 class="text-center" id="calTitle"></h3></div>
+        </div>
+        <br>
+        <div class="row" name="calendar">
+          <div class="col" name="col-empty-left"></div>
+          <div class="col" name="col-empty-left"></div>
+          <div class="col">
             <table id="jan">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">1월</div></td>
@@ -49,7 +56,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="feb">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">2월</div></td>
@@ -65,7 +72,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="mar">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">3월</div></td>
@@ -81,7 +88,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="apr">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">4월</div></td>
@@ -97,12 +104,14 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2"></div>
+          <div class="col" name="col-empty-right"></div>
+          <div class="col" name="col-empty-right"></div>
         </div>
         <br>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-2">
+          <div class="col" name="col-empty-left"></div>
+          <div class="col" name="col-empty-left"></div>
+          <div class="col">
             <table id="may">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">5월</div></td>
@@ -118,7 +127,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="jun">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">6월</div></td>
@@ -134,7 +143,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="jul">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">7월</div></td>
@@ -150,7 +159,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="aug">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">8월</div></td>
@@ -166,12 +175,14 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2"></div>
+          <div class="col" name="col-empty-right"></div>
+          <div class="col" name="col-empty-right"></div>
         </div>
         <br>
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-2">
+          <div class="col" name="col-empty-left"></div>
+          <div class="col" name="col-empty-left"></div>
+          <div class="col">
             <table id="sep">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">9월</div></td>
@@ -187,7 +198,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="oct">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">10월</div></td>
@@ -203,7 +214,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="nov">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">11월</div></td>
@@ -219,7 +230,7 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2">
+          <div class="col">
             <table id="dec">
               <tr>
                 <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">12월</div></td>
@@ -235,7 +246,8 @@
               </tr>
             </table>
           </div>
-          <div class="col-lg-2"></div>
+          <div class="col" name="col-empty-right"></div>
+          <div class="col" name="col-empty-right"></div>
         </div>
       </div>
     </div>
@@ -243,16 +255,18 @@
     <script type="text/javascript">
         // 달력 만들기
         const today = new Date();
-        document.getElementById("calTitle").innerHTML = `${today.getFullYear()} 달력`;
+        document.getElementById("calTitle").innerHTML = `${today.getFullYear()}년`;
 
         function makeMonth() {
-            const month = new Array("jan", "feb", "mar", "apr",
-                                    "may", "jun", "jul", "aug",
-                                    "sep", "oct", "nov", "dec");
+          resFHD();
 
-            for (let i = 0; i < month.length; i++) {
-              loadCalendar(month[i], i, today);
-            }
+          const month = new Array("jan", "feb", "mar", "apr",
+                                  "may", "jun", "jul", "aug",
+                                  "sep", "oct", "nov", "dec");
+
+          for (let i = 0; i < month.length; i++) {
+            loadCalendar(month[i], i, today);
+          }
         }
 
         function loadCalendar(strMon, idxMon, objDate) {
@@ -321,6 +335,8 @@
             const reader = new FileReader();
             reader.onloadend = function() {
               document.getElementById("piccal-bg-img").style.backgroundImage = `url(${reader.result})`;
+              document.getElementById("piccal-bg-img").style.backgroundRepeat = `no-repeat`;
+              document.getElementById("piccal-bg-img").style.backgroundPosition = `center center`;
             }
             if (file) {
                 reader.readAsDataURL(file);
@@ -345,7 +361,7 @@
         }, false);
 
         // 라디오 버튼 이벤트 정의
-        const radios = document.getElementsByName("radio_group");
+        const radios = document.getElementsByName("radio_res");
         for (let i = 0; i < radios.length; i++) {
           radios[i].addEventListener("change", function (e) {
             setCalRes(e.returnValue, radios[i].id);
@@ -355,14 +371,62 @@
         function setCalRes(val, rid) {
           if (val === true) {
             if (rid === "res_fhd") {
-              document.getElementById("piccal-bg-img").style.width = "1920px";
-              document.getElementById("piccal-bg-img").style.height = "1080px";
-            } else {
-              document.getElementById("piccal-bg-img").style.width = "1280px";
-              document.getElementById("piccal-bg-img").style.height = "720px";
+              resFHD();
+            } else if (rid === "res_hd") {
+              resHD();
+            }
+            // else {
+            //   resFIT();
+            // }
+          }
+        }
+
+        const radios_pos = document.getElementsByName("radio_img_size");
+        for (let i = 0; i < radios_pos.length; i++) {
+          radios_pos[i].addEventListener("change", function(e) {
+            setImgPosition(e.returnValue, radios_pos[i].id);
+          }, false);
+        }
+
+        function setImgPosition(val, rid) {
+          if (val === true) {
+            switch (rid) {
+              case "auto":
+                document.getElementById("piccal-bg-img").style.backgroundSize = `auto`;
+                break;
+              case "width":
+                document.getElementById("piccal-bg-img").style.backgroundSize = `100% auto`;
+                break;
+              case "height":
+                document.getElementById("piccal-bg-img").style.backgroundSize = `auto 100%`;
+                break;
+              case "full":
+                document.getElementById("piccal-bg-img").style.backgroundSize = `100% 100%`;
+                break;
             }
           }
         }
+
+        // 배경색 이벤트 정의
+        const bgColor = document.getElementById("bgColorPicker");
+        bgColor.addEventListener("change", function(e) {
+          document.getElementById("piccal-bg-img").style.backgroundColor = e.target.value;
+        }, false);
+
+        function resFHD() {
+          document.getElementById("piccal-bg-img").style.width = "1920px";
+          document.getElementById("piccal-bg-img").style.height = "1080px";
+        }
+
+        function resHD() {
+          document.getElementById("piccal-bg-img").style.width = "1280px";
+          document.getElementById("piccal-bg-img").style.height = "720px";
+        }
+
+        // function resFIT() {
+        //   document.getElementById("piccal-bg-img").style.width = "100%";
+        //   document.getElementById("piccal-bg-img").style.height = "100%";
+        // }
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
