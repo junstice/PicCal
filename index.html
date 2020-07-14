@@ -9,10 +9,11 @@
 </head>
 <body onload="makeMonth()">
     <div>
-      <input type="radio" id="res_fhd" name="radio_res" value="FHD" checked>
-      <label for="res_fhd">FHD(1920 x 1080)</label>
-      <input type="radio" id="res_hd" name="radio_res" value="HD">
+      <span onclick="openNav()">open</span>
+      <input type="radio" id="res_hd" name="radio_res" value="HD" checked>
       <label for="res_hd">HD(1280 x 720)</label>
+      <input type="radio" id="res_fhd" name="radio_res" value="FHD">
+      <label for="res_fhd">FHD(1920 x 1080)</label>
       <button type="button" id="fileSelect">사진 올리기</button>
       <button type="button" id="screenshot">이미지로 저장하기</button>
       <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
@@ -32,7 +33,9 @@
     <div id="piccal-bg-img" style="position: relative;">
       <div class="container text-center" id="calendar_container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
           <div class="row" name="title">
-          <div class="col" id="yearText"><h3 class="text-center" id="calTitle"></h3></div>
+            <div class="col"></div>
+            <div class="col-2" id="yearText"><h3 class="text-center" id="calTitle"></h3></div>
+            <div class="col"></div>
         </div>
         <br>
         <div class="row" name="calendar">
@@ -264,7 +267,7 @@
         document.getElementById("calTitle").innerHTML = `${today.getFullYear()}년`;
 
         function makeMonth() {
-          resFHD();
+          resHD();
 
           for (let i = 0; i < month.length; i++) {
             loadCalendar(month[i], i, today);
@@ -464,6 +467,31 @@
         function eventFalse() {
           return false;
         }
+
+        /* Open when someone clicks on the span element */
+        function openNav() {
+          document.getElementById("infoNav").style.width = "30%";
+        }
+
+        /* Close when someone clicks on the "x" symbol inside the overlay */
+        function closeNav() {
+          document.getElementById("infoNav").style.width = "0%";
+        }
     </script>
   </body>
+
+  <!-- The overlay -->
+  <div id="infoNav" class="overlay">
+    <!-- Button to close the overlay navigation -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <!-- Overlay content -->
+    <div class="overlay-content">
+      <input type="image" name="infoBtn" src="img/question.png">
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
 </html>
