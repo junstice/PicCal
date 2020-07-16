@@ -15,10 +15,9 @@
 
   <!-- Overlay content -->
   <div class="overlay-content">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <p class="text-center">연간 달력을 표시하는 심플한 웹앱입니다.</p>
+    <p class="text-center">버튼을 누르면, 간단하게 배경색을 넣거나 배경사진을 넣을 수도 있습니다.</p>
+    <p class="text-center">연도 부분을 클릭하여 연도를 수정하고, 다른 부분을 클릭하면 수정한 연도의 달력이 표시됩니다.</p>
   </div>
 </div>
 <!-- 패널 오버레이: 꾸미기 -->
@@ -52,16 +51,32 @@
 </div>
 
 <body onload="makeMonth()">
-  <div>
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+        <input type="image" id="infoBtn" src="img/question_50x50.png">
+      </div>
+      <div class="col-1">
+        <input type="image" id="toolBtn" src="img/work_50x50.png">
+      </div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+    </div>
     <span>
-      <input type="image" id="infoBtn" src="img/question_50x50.png">
-      <input type="image" id="toolBtn" src="img/work_50x50.png">
     </span>
   </div>
   <!-- Calendar Code Start -->
   <br>
   <div id="piccal-bg-img" style="position: relative;">
-    <div class="container-fluid text-center" id="calendar_container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="container text-center" id="calendar_container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <div class="row" name="title">
           <div class="col"></div>
           <div class="col-2" id="yearText"><h3 class="text-center" id="calTitle"></h3></div>

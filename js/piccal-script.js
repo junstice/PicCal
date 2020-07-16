@@ -235,10 +235,10 @@ tool.addEventListener("click", () => {
 /* Open when someone clicks on the span element */
 function openNav(str) {
     if (str === "info") {
-        document.getElementById("infoNav").style.width = "20%";
+        document.getElementById("infoNav").style.width = "30%";
     }
     else if (str === "tool") {
-        document.getElementById("toolNav").style.width = "20%";
+        document.getElementById("toolNav").style.width = "30%";
     }
 }
 
