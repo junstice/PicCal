@@ -6,7 +6,7 @@ const month = new Array("jan", "feb", "mar", "apr",
                         "may", "jun", "jul", "aug",
                         "sep", "oct", "nov", "dec");
 // 달력 타이틀 작성
-document.getElementById("calTitle").innerHTML = `${today.getFullYear()}년`;
+document.getElementById("calTitle").innerHTML = `${today.getFullYear()}`;
 
 /* 달력 생성하기 */
 function makeMonth() {
@@ -191,7 +191,7 @@ numYear.addEventListener("click", () => {
     const inputNum = document.createElement("input");          
     inputNum.type = "number"
     inputNum.value = newYear ? newYear : today.getFullYear();
-    inputNum.style = "width: 80px; font-size: 25px; font-weight: bold;";
+    inputNum.style = "width: 85px; font-size: 25px; font-weight: bold; float: left; color: blue;";
     inputNum.id = "setYear";
     inputNum.min = "1900";
     inputNum.max = "2150";
@@ -208,9 +208,9 @@ numYear.addEventListener("focusout", () => {
     const inputNum = document.getElementById("setYear");
 
     const editedYear = document.createElement("h3");
-    editedYear.className = "text-center";
+    editedYear.className = "text-left";
     editedYear.id = "calTitle";
-    editedYear.innerHTML = inputNum.value + "년";
+    editedYear.innerHTML = inputNum.value;
 
     newYear = inputNum.value;
     
@@ -238,7 +238,7 @@ function openNav(str) {
         document.getElementById("infoNav").style.width = "30%";
     }
     else if (str === "tool") {
-        document.getElementById("toolNav").style.width = "30%";
+        document.getElementById("toolNav").style.width = "20%";
     }
 }
 

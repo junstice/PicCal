@@ -15,9 +15,15 @@
 
   <!-- Overlay content -->
   <div class="overlay-content">
-    <p class="text-center">연간 달력을 표시하는 심플한 웹앱입니다.</p>
-    <p class="text-center"><img src="img/work.png" width="20">버튼을 누르면, 간단하게 배경색을 넣거나 배경사진을 넣을 수도 있습니다.</p>
-    <p class="text-center">연도 부분을 클릭하여 연도를 수정하고, 다시 다른 부분을 클릭하면 수정한 연도의 달력이 표시됩니다.</p>
+    <p class="text-left" style="padding: 10px;">
+      ※<br>연간 달력을 표시하는 심플한 웹앱입니다.
+    </p>
+    <p class="text-left" style="padding: 10px;">
+      ※<br><img src="img/work.png" width="20">버튼을 누르면, <br>배경색을 넣거나 배경사진을 넣어 간단히 편집이 가능합니다.
+    </p>
+    <p class="text-left" style="padding: 10px;">
+      ※<br>연도 부분을 클릭하여 연도를 수정하고, <br>다시 다른 부분을 클릭하면 수정한 연도의 달력이 표시됩니다.
+    </p>
   </div>
 </div>
 <!-- 패널 오버레이: 꾸미기 -->
@@ -32,12 +38,12 @@
     <input type="radio" id="res_fhd" name="radio_res" value="FHD">
     <label for="res_fhd">FHD(1920 x 1080)</label>
     <br>
-    <button type="button" id="fileSelect">사진 올리기</button>
-    <button type="button" id="screenshot">이미지로 저장하기</button>
+    <button type="button" class="btn btn-dark" id="fileSelect">사진 올리기</button>
+    <button type="button" class="btn btn-dark" id="screenshot">이미지로 저장하기</button>
     <input type="file" id="fileElem" style="display: none;" accept=".jpg,.jpeg,.png,.bmp">
     <br>
+    <label for="bgColorPicker" class="btn btn-dark">배경색 지정하기</label>
     <input type="color" id="bgColorPicker" value="#ffffff">
-    <label for="bgColorPicker">배경색 지정</label>
     <br>
     <input type="radio" name="radio_img_size" id="auto" checked>
     <label for="auto">가운데</label>
@@ -51,45 +57,26 @@
 </div>
 
 <body onload="makeMonth()">
-  <div class="container">
-    <div class="row">
-      <div class="col-1">
-        <input type="image" id="infoBtn" src="img/question.png" style="width: 50px;">
-      </div>
-      <div class="col-1">
-        <input type="image" id="toolBtn" src="img/work.png" style="width: 50px;">
-      </div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-    </div>
-    <span>
-    </span>
-  </div>
+  <input type="image" id="infoBtn" src="img/question.png" style="z-index: 1; position: fixed; left: 0px; top: 0px; width: 50px;">
+  <input type="image" id="toolBtn" src="img/work.png" style="z-index: 1; position: fixed; left: 0px; top: 60px; width: 50px;">
+
   <!-- Calendar Code Start -->
-  <br>
-  <div id="piccal-bg-img" style="position: relative;">
+  <div id="piccal-bg-img" style="position: relative; z-index: 0;">
     <div class="container text-center" id="calendar_container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <div class="row" name="title">
           <div class="col"></div>
-          <div class="col-2" id="yearText"><h3 class="text-center" id="calTitle"></h3></div>
+          <div class="col-2"><h3 class="text-right">Calendar</h3></div>
+          <div class="col-2" id="yearText"><h3 class="text-left" id="calTitle"></h3></div>
           <div class="col"></div>
       </div>
       <br>
       <div class="row" name="calendar">
         <div class="col" name="col-empty-left"></div>
         <div class="col" name="col-empty-left"></div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="jan">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">1월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">1월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -102,10 +89,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="feb">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">2월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">2월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -118,10 +105,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="mar">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">3월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">3월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -134,10 +121,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="apr">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">4월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">4월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -157,10 +144,10 @@
       <div class="row">
         <div class="col" name="col-empty-left"></div>
         <div class="col" name="col-empty-left"></div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="may">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">5월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">5월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -173,10 +160,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="jun">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">6월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">6월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -189,10 +176,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="jul">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">7월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">7월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -205,10 +192,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="aug">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">8월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">8월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -228,10 +215,10 @@
       <div class="row">
         <div class="col" name="col-empty-left"></div>
         <div class="col" name="col-empty-left"></div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="sep">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">9월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">9월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -244,10 +231,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="oct">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">10월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">10월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -260,10 +247,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="nov">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">11월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">11월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>
@@ -276,10 +263,10 @@
             </tr>
           </table>
         </div>
-        <div class="col">
+        <div class="col cal-data">
           <table id="dec">
             <tr>
-              <td colspan="7" align="center"><div class="d-block bg-primary text-white rounded">12월</div></td>
+              <td colspan="7" align="center"><div class="d-block bg-secondary text-white rounded">12월</div></td>
             </tr>
             <tr>
               <td class="sunday">日</td>

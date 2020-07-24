@@ -1,13 +1,22 @@
 .sunday {
-    color: #ff0066;
-  }
-  .saturday {
-    color: #0066ff;
-  }
+  color: #ff0066;
+}
+.saturday {
+  color: #0066ff;
+}
 
-  table {
-    font-size: small;
-  }
+table {
+  font-size: small;
+}
+
+.cal-data {
+  background-color: #eeeeee;
+  opacity: 0.7;
+}
+
+.bg-secondary {
+  opacity: 0.5;
+}
 
 /* The Overlay (background) */
 .overlay {
@@ -15,7 +24,7 @@
   height: 100%;
   width: 0;
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 2; /* Sit on top */
   left: 0;
   top: 0;
   background-color: rgba(191,191,191, 0.9); /* Black w/opacity */
